@@ -1,12 +1,9 @@
 /* ═══════════════════════════════════════════════════
    FRAGMENTS — Portfolio Stylesheet
-   Bearbeite hier alle Farben, Abstände und Schriften
    ═══════════════════════════════════════════════════ */
 
 /* ─── DESIGN TOKENS ───────────────────────────────── */
 :root {
-  --black:     #080808;
-  --dark:      #111111;
   --text:      #e8e0d5;
   --muted:     #7a7068;
   --gold:      #c8a97e;
@@ -26,42 +23,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
-/* ═══════════════════════════════════════════════════
-   FARBVERLAUF – ein einziger Gradient über die ganze Seite
-   Kein Kapitel hat einen eigenen Hintergrund, alles
-   transparent → kein harter Schnitt mehr.
-
-   Geschichte (von oben nach unten):
-   0%   Weiß        – Hero / Titel
-   14%  Hellgrau    – Bewunderung beginnt
-   28%  Mittelgrau  – Bewunderung endet / Vergleich beginnt
-   38%  Dunkelgrau  – Vergleich
-   52%  Fast-Schwarz – Tiefpunkt oben
-   62%  Tiefschwarz  – Tiefpunkt Mitte (dunkelster Punkt)
-   72%  Dunkelgrau  – Identität beginnt
-   82%  Grau        – Identität endet
-   90%  Warmgrau    – Akzeptanz beginnt aufzuhellen
-   100% Warm-Weiß  – Akzeptanz / Footer
-   ═══════════════════════════════════════════════════ */
 body {
-  background:
-    linear-gradient(
-      to bottom,
-      #ffffff  0%,
-      #ece8e2  10%,
-      #d4cfc8  18%,
-      #a8a39b  26%,
-      #5a5650  34%,
-      #2e2a25  42%,
-      #141210  52%,
-      #070605  62%,
-      #141210  70%,
-      #1e1b17  78%,
-      #3a3530  86%,
-      #c8c2b8  93%,
-      #f0ece5  100%
-    );
-  background-attachment: fixed;
+  background: #080808;
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 300;
@@ -76,26 +39,25 @@ img {
   object-fit: cover;
 }
 
-/* ─── THREAD (goldener Scrollpfeil links) ─────────── */
+/* ─── THREAD ──────────────────────────────────────── */
 #thread-track {
   position: fixed;
   left: 36px;
   top: 0;
   bottom: 0;
   width: var(--thread-w);
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
   z-index: 100;
   pointer-events: none;
 }
 
 #thread-fill {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 0%;
   background: linear-gradient(to bottom, var(--gold), #e8c98a, var(--gold));
-  box-shadow: 0 0 8px rgba(200, 169, 126, 0.5);
+  box-shadow: 0 0 8px rgba(200,169,126,0.5);
   transition: height 0.06s linear;
 }
 
@@ -104,12 +66,11 @@ img {
   left: 50%;
   top: 0%;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
+  width: 0; height: 0;
   border-left:  5px solid transparent;
   border-right: 5px solid transparent;
   border-top:   8px solid var(--gold);
-  filter: drop-shadow(0 0 4px rgba(200, 169, 126, 0.6));
+  filter: drop-shadow(0 0 4px rgba(200,169,126,0.6));
   transition: top 0.06s linear;
 }
 
@@ -126,8 +87,7 @@ img {
 }
 
 .nav-dot {
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--gold-dim);
   text-decoration: none;
@@ -140,7 +100,89 @@ img {
   transform: scale(1.8);
 }
 
-/* ─── HERO ────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════
+   SEKTIONSFARBEN
+   Jede Sektion hat einen eigenen Gradienten der sanft
+   in die Farbe der NÄCHSTEN Sektion übergeht.
+   Dadurch entsteht ein weicher Fluss ohne harten Schnitt.
+
+   Farbgeschichte:
+   Hero         #f5f2ed  (warm weiß)
+   Bewunderung  #dedad4 → #c8c3bc  (hellgrau)
+   Vergleich    #3a3630 → #1e1b17  (dunkelgrau)
+   Tiefpunkt    #111009 → #070605  (fast schwarz)
+   Identität    #141210 → #201d19  (dunkelgrau)
+   Akzeptanz    #2a2720 → #f0ece5  (dunkelgrau → warm weiß)
+   Footer       #f0ece5  (warm weiß)
+   ═══════════════════════════════════════════════════ */
+
+/* HERO: warm weiß, faded unten in hellgrau (Übergang zu Bewunderung) */
+#hero {
+  background: linear-gradient(to bottom,
+  #ffffff  0%,
+  #f5f2ed 60%,
+  #dedad4 100%
+  );
+}
+
+/* BEWUNDERUNG: hellgrau oben (kommt von Hero) → dunkelgrau unten (Übergang zu Vergleich) */
+#chapter-01 {
+  background: linear-gradient(to bottom,
+  #dedad4  0%,
+  #c8c3bc 40%,
+  #6e6a64 80%,
+  #3a3630 100%
+  );
+}
+
+/* VERGLEICH: dunkelgrau oben (kommt von Bewunderung) → fast schwarz unten (Übergang zu Tiefpunkt) */
+#chapter-02 {
+  background: linear-gradient(to bottom,
+  #3a3630  0%,
+  #252118 40%,
+  #161310 80%,
+  #111009 100%
+  );
+}
+
+/* TIEFPUNKT: fast schwarz oben → tiefschwarz Mitte → leicht aufhellen unten (Übergang zu Identität) */
+#chapter-03 {
+  background: linear-gradient(to bottom,
+  #111009  0%,
+  #080706 30%,
+  #070605 55%,
+  #0d0b09 80%,
+  #141210 100%
+  );
+}
+
+/* IDENTITÄT: dunkelgrau oben (kommt von Tiefpunkt) → etwas heller unten (Übergang zu Akzeptanz) */
+#chapter-04 {
+  background: linear-gradient(to bottom,
+  #141210  0%,
+  #1a1714 40%,
+  #201d19 70%,
+  #2a2720 100%
+  );
+}
+
+/* AKZEPTANZ: dunkelgrau oben (kommt von Identität) → warm weiß unten (Übergang zu Footer) */
+#chapter-05 {
+  background: linear-gradient(to bottom,
+  #2a2720  0%,
+  #4a4540 25%,
+  #9a9088 55%,
+  #d4cec5 78%,
+  #f0ece5 100%
+  );
+}
+
+/* FOOTER: warm weiß (nahtloser Abschluss von Akzeptanz) */
+#footer {
+  background: #f0ece5;
+}
+
+/* ─── HERO INHALT ─────────────────────────────────── */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -151,7 +193,6 @@ img {
   padding: 0 var(--page-pad);
   text-align: center;
   overflow: hidden;
-  background: transparent;
 }
 
 .hero-eyebrow {
@@ -218,11 +259,10 @@ img {
   animation: scrollPulse 2s ease-in-out infinite;
 }
 
-/* ─── CHAPTERS – alle transparent, kein eigener BG ── */
+/* ─── CHAPTERS ────────────────────────────────────── */
 .chapter {
   padding: 120px var(--page-pad) 140px var(--left-pad);
   position: relative;
-  background: transparent;
 }
 
 .chapter-inner {
@@ -281,8 +321,9 @@ img {
   line-height: 1.8;
 }
 
-/* ─── TEXTFARBEN für helle Abschnitte (Bewunderung) ─ */
-/* Kapitel 1 liegt im hellen Bereich → dunkle Schrift  */
+/* ─── TEXTFARBEN FÜR HELLE SEKTIONEN ─────────────── */
+
+/* Kapitel 1 (hellgrau) → dunkle Texte */
 #chapter-01 .chapter-de       { color: #1a1612; }
 #chapter-01 .chapter-num      { color: #7a5a2a; }
 #chapter-01 .chapter-en       { color: #6a6058; }
@@ -292,6 +333,23 @@ img {
 #chapter-01 .setting-val      { color: #6a4820; }
 #chapter-01 .photo-type-badge { color: #6a6058; border-color: #b0a89e; }
 #chapter-01 .camera-settings  { border-top-color: #b0a89e; }
+
+/* Footer (hell) → dunkle Texte */
+.footer-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #7a5a2a;
+  font-style: italic;
+}
+
+.footer-meta {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: #7a7068;
+  line-height: 2.2;
+  text-transform: uppercase;
+  text-align: right;
+}
 
 /* ─── PHOTO ENTRY ─────────────────────────────────── */
 .photo-entry {
@@ -327,7 +385,7 @@ img {
   object-fit: cover;
   filter: brightness(0.88) contrast(1.05);
   transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              filter 0.5s ease;
+  filter 0.5s ease;
 }
 
 .photo-frame:hover img {
@@ -392,27 +450,10 @@ img {
 /* ─── FOOTER ──────────────────────────────────────── */
 #footer {
   padding: 80px var(--page-pad) 80px var(--left-pad);
-  background: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-}
-
-.footer-title {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  color: #7a5a2a;
-  font-style: italic;
-}
-
-.footer-meta {
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: #7a7068;
-  line-height: 2.2;
-  text-transform: uppercase;
-  text-align: right;
 }
 
 /* ─── REVEAL ANIMATIONS ───────────────────────────── */
@@ -441,40 +482,22 @@ img {
 
 /* ─── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 900px) {
-  :root {
-    --page-pad: 40px;
-    --left-pad: 64px;
-  }
+  :root { --page-pad: 40px; --left-pad: 64px; }
 
   .photo-entry,
   .photo-entry--reverse {
     grid-template-columns: 1fr;
     direction: ltr;
   }
-
-  .photo-entry--reverse > * {
-    direction: ltr;
-  }
-
-  .photo-frame {
-    aspect-ratio: 4 / 3;
-  }
+  .photo-entry--reverse > * { direction: ltr; }
+  .photo-frame { aspect-ratio: 4 / 3; }
 }
 
 @media (max-width: 600px) {
-  :root {
-    --page-pad: 24px;
-    --left-pad: 48px;
-  }
-
+  :root { --page-pad: 24px; --left-pad: 48px; }
   #thread-track { left: 16px; }
   #nav-dots { display: none; }
-
-  #footer {
-    flex-direction: column;
-    text-align: center;
-  }
-
+  #footer { flex-direction: column; text-align: center; }
   .footer-meta { text-align: center; }
 }
 

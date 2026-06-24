@@ -19,15 +19,49 @@
 
   --thread-w:  1.5px;
   --page-pad:  80px;
-  --left-pad:  100px; /* extra left margin for thread */
+  --left-pad:  100px;
 }
 
 /* ─── RESET ───────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
+/* ═══════════════════════════════════════════════════
+   FARBVERLAUF – ein einziger Gradient über die ganze Seite
+   Kein Kapitel hat einen eigenen Hintergrund, alles
+   transparent → kein harter Schnitt mehr.
+
+   Geschichte (von oben nach unten):
+   0%   Weiß        – Hero / Titel
+   14%  Hellgrau    – Bewunderung beginnt
+   28%  Mittelgrau  – Bewunderung endet / Vergleich beginnt
+   38%  Dunkelgrau  – Vergleich
+   52%  Fast-Schwarz – Tiefpunkt oben
+   62%  Tiefschwarz  – Tiefpunkt Mitte (dunkelster Punkt)
+   72%  Dunkelgrau  – Identität beginnt
+   82%  Grau        – Identität endet
+   90%  Warmgrau    – Akzeptanz beginnt aufzuhellen
+   100% Warm-Weiß  – Akzeptanz / Footer
+   ═══════════════════════════════════════════════════ */
 body {
-  background: var(--black);
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff  0%,
+      #ece8e2  10%,
+      #d4cfc8  18%,
+      #a8a39b  26%,
+      #5a5650  34%,
+      #2e2a25  42%,
+      #141210  52%,
+      #070605  62%,
+      #141210  70%,
+      #1e1b17  78%,
+      #3a3530  86%,
+      #c8c2b8  93%,
+      #f0ece5  100%
+    );
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 300;
@@ -49,7 +83,7 @@ img {
   top: 0;
   bottom: 0;
   width: var(--thread-w);
-  background: #1e1a16;
+  background: rgba(255,255,255,0.08);
   z-index: 100;
   pointer-events: none;
 }
@@ -117,22 +151,14 @@ img {
   padding: 0 var(--page-pad);
   text-align: center;
   overflow: hidden;
-}
-
-#hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 60%,
-    rgba(200, 169, 126, 0.06) 0%, transparent 70%);
-  pointer-events: none;
+  background: transparent;
 }
 
 .hero-eyebrow {
   font-size: 0.7rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #8a6a3a;
   margin-bottom: 32px;
   opacity: 0;
   animation: fadeUp 1s 0.3s ease forwards;
@@ -144,21 +170,21 @@ img {
   font-weight: 400;
   line-height: 0.9;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: #1a1612;
   opacity: 0;
   animation: fadeUp 1.1s 0.5s ease forwards;
 }
 
 .hero-title em {
   font-style: italic;
-  color: var(--gold);
+  color: #8a6a3a;
 }
 
 .hero-sub {
   margin-top: 40px;
   font-size: 0.78rem;
   letter-spacing: 0.15em;
-  color: var(--muted);
+  color: #7a7068;
   text-transform: uppercase;
   line-height: 2;
   opacity: 0;
@@ -182,29 +208,21 @@ img {
   font-size: 0.65rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #8a7a6a;
 }
 
 .scroll-line {
   width: 1px;
   height: 48px;
-  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  background: linear-gradient(to bottom, #8a6a3a, transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 
-/* ─── CHAPTERS ────────────────────────────────────── */
+/* ─── CHAPTERS – alle transparent, kein eigener BG ── */
 .chapter {
   padding: 120px var(--page-pad) 140px var(--left-pad);
   position: relative;
-}
-
-.chapter::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 50% 80% at 80% 50%,
-    rgba(200, 169, 126, 0.025) 0%, transparent 60%);
-  pointer-events: none;
+  background: transparent;
 }
 
 .chapter-inner {
@@ -263,7 +281,19 @@ img {
   line-height: 1.8;
 }
 
-/* ─── PHOTO ENTRY (Bild + Metainfo nebeneinander) ─── */
+/* ─── TEXTFARBEN für helle Abschnitte (Bewunderung) ─ */
+/* Kapitel 1 liegt im hellen Bereich → dunkle Schrift  */
+#chapter-01 .chapter-de       { color: #1a1612; }
+#chapter-01 .chapter-num      { color: #7a5a2a; }
+#chapter-01 .chapter-en       { color: #6a6058; }
+#chapter-01 .chapter-quote    { color: #5a5048; border-left-color: #9a7a50; }
+#chapter-01 .photo-caption    { color: #2a2420; }
+#chapter-01 .setting-label    { color: #9a7a50; }
+#chapter-01 .setting-val      { color: #6a4820; }
+#chapter-01 .photo-type-badge { color: #6a6058; border-color: #b0a89e; }
+#chapter-01 .camera-settings  { border-top-color: #b0a89e; }
+
+/* ─── PHOTO ENTRY ─────────────────────────────────── */
 .photo-entry {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -272,15 +302,13 @@ img {
   margin-bottom: 96px;
 }
 
-/* Abwechselnd: Bild rechts */
 .photo-entry--reverse {
-  direction: rtl; /* flip order */
+  direction: rtl;
 }
 .photo-entry--reverse > * {
-  direction: ltr; /* reset inner text direction */
+  direction: ltr;
 }
 
-/* letztes entry kein extra margin */
 .photo-entry:last-child {
   margin-bottom: 0;
 }
@@ -307,7 +335,7 @@ img {
   filter: brightness(0.96) contrast(1.02);
 }
 
-/* ─── PHOTO META (Beschreibung + Kameraeinstellungen) */
+/* ─── PHOTO META ──────────────────────────────────── */
 .photo-meta {
   display: flex;
   flex-direction: column;
@@ -320,10 +348,8 @@ img {
   font-size: 0.9rem;
   line-height: 1.75;
   color: var(--text);
-  /* ── Hier eure Beschreibung eintragen in index.html ── */
 }
 
-/* Kamera-Settings Leiste */
 .camera-settings {
   display: flex;
   flex-wrap: wrap;
@@ -350,10 +376,8 @@ img {
   font-weight: 400;
   color: var(--gold);
   font-family: var(--font-display);
-  /* ── Wert in index.html eintragen, z.B. f/2.8 ─── */
 }
 
-/* Badge für Bildkategorie (Portrait, Produkt etc.) */
 .photo-type-badge {
   display: inline-block;
   align-self: flex-start;
@@ -368,7 +392,7 @@ img {
 /* ─── FOOTER ──────────────────────────────────────── */
 #footer {
   padding: 80px var(--page-pad) 80px var(--left-pad);
-  background: #f0ece5;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -378,14 +402,14 @@ img {
 .footer-title {
   font-family: var(--font-display);
   font-size: 1.4rem;
-  color: #8a6a3a;
+  color: #7a5a2a;
   font-style: italic;
 }
 
 .footer-meta {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
-  color: #8a8078;
+  color: #7a7068;
   line-height: 2.2;
   text-transform: uppercase;
   text-align: right;
@@ -462,61 +486,3 @@ img {
   .scroll-line { animation: none; }
   html { scroll-behavior: auto; }
 }
-
-/* ═══════════════════════════════════════════════════
-   SEITENFARBEN – Wie in der PowerPoint
-   Geschichte: hell (Titelseite) → dunkel (Tiefpunkt) → wieder hell (Akzeptanz)
-   ═══════════════════════════════════════════════════ */
-
-/* Hero – weiß, clean */
-#hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f0ede8 100%);
-}
-
-/* Kapitel 1 – Hellgrau → Weiß (wie PowerPoint Slide 2) */
-#chapter-01 {
-  background: linear-gradient(180deg, #d6d2cc 0%, #e8e4de 40%, #f5f2ed 100%);
-}
-
-/* Kapitel 2 – Dunkelgrau → fast Schwarz (wie PowerPoint Slide 3) */
-#chapter-02 {
-  background: linear-gradient(180deg, #2e2b27 0%, #1a1815 55%, #111009 100%);
-}
-
-/* Kapitel 3 – Tiefschwarz, dunkelster Punkt (wie PowerPoint Slide 4) */
-#chapter-03 {
-  background: linear-gradient(180deg, #141210 0%, #0a0908 50%, #060504 100%);
-}
-
-/* Kapitel 4 – Dunkelgrau, leicht aufhellend (wie PowerPoint Slide 5) */
-#chapter-04 {
-  background: linear-gradient(180deg, #1c1a17 0%, #252119 55%, #1a1814 100%);
-}
-
-/* Kapitel 5 – Dunkelgrau → Weiß, Licht kehrt zurück (wie PowerPoint Slide 6) */
-#chapter-05 {
-  background: linear-gradient(180deg, #2a2720 0%, #6b6358 45%, #d4cec5 75%, #f0ece5 100%);
-}
-
-/* ── Textfarben für helle Sektionen (Hero + Kapitel 1 + Ende Kapitel 5) ── */
-
-#hero .hero-eyebrow         { color: #8a7a6a; }
-#hero .hero-title           { color: #1a1612; }
-#hero .hero-title em        { color: #8a6a3a; }
-#hero .hero-sub             { color: #9a9088; }
-#hero .scroll-line          { background: linear-gradient(to bottom, #8a6a3a, transparent); }
-
-#chapter-01 .chapter-de         { color: #1a1612; }
-#chapter-01 .chapter-num        { color: #8a6a3a; }
-#chapter-01 .chapter-en         { color: #8a8078; }
-#chapter-01 .chapter-quote      { color: #6a6058; border-left-color: #a08060; }
-#chapter-01 .photo-caption      { color: #2a2420; }
-#chapter-01 .setting-label      { color: #a08060; }
-#chapter-01 .setting-val        { color: #6a4820; }
-#chapter-01 .photo-type-badge   { color: #7a7068; border-color: #c0b8b0; }
-#chapter-01 .camera-settings    { border-top-color: #c0b8b0; }
-
-/* Übergang Kapitel 5: Anfang dunkel (Text hell), Ende hell (Text dunkel)
-   Wir lassen den Text hell – sieht auf dem dunklen Anfang gut aus,
-   und der gradient ist sanft genug am Ende */
-#chapter-05 .chapter-quote      { color: var(--muted); border-left-color: var(--gold-dim); }

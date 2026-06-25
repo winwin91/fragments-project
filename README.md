@@ -16,4 +16,4 @@ Das Projekt zeigt, wie schnell Bewunderung in Vergleich und Selbstzweifel überg
 
 ## Website
 
-[Fragments online ansehen](https://winwin91.github.io/fragments-project/)
+["Fragments" online ansehen](https://winwin91.github.io/fragments-project/)

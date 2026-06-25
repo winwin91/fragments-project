@@ -330,10 +330,10 @@ img {
 #chapter-01 .chapter-num          { color: #7a5a2a; }
 #chapter-01 .chapter-en           { color: #6a6058; }
 #chapter-01 .chapter-quote        { color: #5a5048; border-left-color: #9a7a50; }
-/* Erstes Bild (Konzert) – hell, Beschreibung dunkel genug zum Lesen */
-#chapter-01 .photo-entry:first-of-type .photo-caption    { color: #1a1410; }
+/* Erstes Bild (Konzert) – hell, alles dunkel und gut lesbar */
+#chapter-01 .photo-entry:first-of-type .photo-caption    { color: #1a1208; }
 #chapter-01 .photo-entry:first-of-type .setting-label    { color: #4a3010; }
-#chapter-01 .photo-entry:first-of-type .setting-val      { color: #3a2008; font-weight: 600; }
+#chapter-01 .photo-entry:first-of-type .setting-val      { color: #2a1400; font-weight: 700; }
 #chapter-01 .photo-entry:first-of-type .photo-type-badge { color: #4a4038; border-color: #908880; }
 #chapter-01 .photo-entry:first-of-type .camera-settings  { border-top-color: #908880; }
 /* Zweites Bild (Handy) – liegt im dunkleren Übergangsbereich → helle Texte */

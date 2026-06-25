@@ -473,6 +473,18 @@ img {
   font-family: var(--font-display);
 }
 
+/* Kapitel 1, erstes Bild: Kamerawerte dunkel – maximale Spezifität */
+#chapter-01 > .chapter-inner > .photo-entry:first-of-type .setting-val {
+  color: #2a1400 !important;
+  font-weight: 700 !important;
+}
+#chapter-01 > .chapter-inner > .photo-entry:first-of-type .setting-label {
+  color: #4a3010 !important;
+}
+#chapter-01 > .chapter-inner > .photo-entry:first-of-type .photo-caption {
+  color: #1a1208 !important;
+}
+
 .photo-type-badge {
   display: inline-block;
   align-self: flex-start;

@@ -411,6 +411,11 @@ img {
   aspect-ratio: 2 / 3;
 }
 
+/* Schatten-Bild in Kapitel 3 (letztes Bild) ist Hochformat */
+#chapter-03 .photo-entry:last-of-type .photo-frame {
+  aspect-ratio: 2 / 3;
+}
+
 .photo-frame img {
   width: 100%;
   height: 100%;
